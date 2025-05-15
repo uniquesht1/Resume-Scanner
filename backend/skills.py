@@ -1,6 +1,14 @@
 from sentence_transformers import SentenceTransformer, util
+from dotenv import load_dotenv
+import os
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+# Load environment variables from .env file
+load_dotenv()
+
+# Use MODEL_NAME and THRESHOLD from environment variables
+model = SentenceTransformer(os.getenv("MODEL_NAME", "all-MiniLM-L6-v2"))
+THRESHOLD = float(os.getenv("THRESHOLD", 0.6))
+
 KNOWN_SKILLS = [
     "python", "machine learning", "docker", "react", "node.js", "fastapi", "django", "postgresql", "sql", "aws",
     "data analysis", "deep learning", "nlp", "pandas", "numpy", "tensorflow", "keras", "flask", "azure", "git"
@@ -18,7 +26,7 @@ def extract_skills(text):
     for emb in sentence_embeddings:
         cosine_scores = util.cos_sim(emb, skill_embeddings)[0]
         top_index = cosine_scores.argmax().item()
-        if cosine_scores[top_index] > 0.4:
+        if cosine_scores[top_index] > THRESHOLD:
             matched_skills.add(KNOWN_SKILLS[top_index])
             total_score += float(cosine_scores[top_index])
 

@@ -3,12 +3,16 @@ from PyPDF2 import PdfReader
 from transformers import pipeline
 import sys
 import os
+from dotenv import load_dotenv
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from backend.skills import extract_skills
 
-# Initialize the summarization pipeline
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+# Load environment variables from .env file
+load_dotenv()
+
+# Use SUMMARY_MODEL from environment variables
+summarizer = pipeline("summarization", model=os.getenv("SUMMARY_MODEL", "facebook/bart-large-cnn"))
 
 router = APIRouter()
 
