@@ -18,6 +18,3 @@ ENV PYTHONPATH=/app
 
 # Run the application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-
-# Import the extract_skills function from the skills module
-from skills import extract_skills
