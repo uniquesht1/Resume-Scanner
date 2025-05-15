@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.resume import router as resume_router
+from resume import router as resume_router
 from dotenv import load_dotenv
 import os
 

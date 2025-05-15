@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from backend.skills import extract_skills
+from skills import extract_skills
 
 # Load environment variables from .env file
 load_dotenv()
